@@ -189,9 +189,6 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
-# Ignore bundler config.
-/.bundle
-
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
@@ -201,9 +198,19 @@ ModelManifest.xml
 !/log/.keep
 /tmp
 
-#Ignore RubyMine workspace folder
-.idea
-
-# Ignore erroneous bootstrap pre-compile files
-/public/assets/glyphicons*
-/public/assets/bootstrap/glyphicons*
+/.idea/
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+*.bundle
+*.so
+*.o
+*.a
+*.gem
+mkmf.log
