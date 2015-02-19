@@ -1,6 +1,7 @@
 # ThetvdbParty
 
 The thetvdb_party gem accesses the TheTvDB programmers API as it is described on http://thetvdb.com/wiki/index.php/Programmers_API
+
 It uses compression to minimize bandwith when accessing Full Series Records.
 
 ## Installation
