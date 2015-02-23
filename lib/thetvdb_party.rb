@@ -4,6 +4,8 @@ require 'thetvdb_party/baseseriesrecord'
 require 'thetvdb_party/baseepisoderecord'
 require 'thetvdb_party/client'
 require 'thetvdb_party/searchseriesrecord'
+require 'thetvdb_party/actor'
+require 'thetvdb_party/banner'
 require 'thetvdb_party/version'
 
 # thetvdb_party gem root namespace
