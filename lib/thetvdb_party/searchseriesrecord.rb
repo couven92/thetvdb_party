@@ -52,13 +52,6 @@ module TheTvDbParty
       @client.get_base_series_record @seriesid
     end
 
-    # Retrieves banners related to this series
-    # Return::    An array of TheTvDbParty::Banner instances that represents each banner related to this series; or +nil+, if the banners could not be retrieved. Note: may return [] if banners are retrieved but there are none.
-    # See Also:   TheTvDbParty::Client#get_banners
-    def get_banners
-      @client.get_banners @seriesid
-    end
-
     private
     def read_hash_values
       def client; @client end
