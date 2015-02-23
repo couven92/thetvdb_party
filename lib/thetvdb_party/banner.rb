@@ -40,6 +40,7 @@ module TheTvDbParty
 
     private
     def read_hash_values
+      @id = default @hashValues["id"], -1
     	@bannerPath = @hashValues["BannerPath"]
 	    @thumbnailPath = @hashValues["ThumbnailPath"]
 	    @vignettePath = @hashValues["VignettePath"]
@@ -48,11 +49,15 @@ module TheTvDbParty
 	    @language = @hashValues["Language"]
 	    @season = @hashValues["Season"]
 	    @rating = @hashValues["Rating"]
-	    @ratingCount = @hashValues["RatingCount"] ? @hashValues["RatingCount"] : 0
-	    @seriesName = @hashValues["SeriesName"] ? @hashValues["SeriesName"] : false
+	    @ratingCount = default @hashValues["RatingCount"], 0
+	    @seriesName = default @hashValues["SeriesName"], false
 	    @colors = @hashValues["Colors"]
 
       nil
+    end
+
+    def default value, default
+      return value ? value : default
     end
   end
 end

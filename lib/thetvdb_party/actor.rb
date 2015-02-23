@@ -26,13 +26,17 @@ module TheTvDbParty
 
     private
     def read_hash_values
-      @id = @hashValues["id"]
-      @image = @hashValues["image"]
-      @name = @hashValues["name"]
-      @role = @hashValues["role"]
-      @sortOrder = @hashValues["sortOrder"] ? @hashValues["role"] : 0
+      @id = default @hashValues["id"], -1
+      @image = @hashValues["Image"]
+      @name = @hashValues["Name"]
+      @role = @hashValues["Role"]
+      @sortOrder = default @hashValues["SortOrder"], 0
 
       nil
+    end
+    
+    def default value, default
+      return value ? value : default
     end
   end
 end
