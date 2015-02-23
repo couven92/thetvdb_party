@@ -175,6 +175,21 @@ module TheTvDbParty
       end
     end
 
+    def get_series_all(seriesid)
+      unless @language
+        request_url = "#{@apikey}/series/#{seriesid}/all"
+      else
+        request_url = "#{@apikey}/series/#{seriesid}/all/#{@language}.zip"
+      end
+
+      resp = self.class.get(request_url)
+
+      return nil unless resp.body.extname == ".zip"
+
+      AllSeriesInformation.new(@client, resp.body)
+
+    end
+
     private
     def get_base_episode_record_from_url(request_url)
       resp = self.class.get(request_url).parsed_response
