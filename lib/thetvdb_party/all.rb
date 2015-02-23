@@ -12,24 +12,25 @@ module TheTvDbParty
     end
 
 
-  private
+    private
 
-  def unzip_file(zip_file)
-    zip_file.glob("Actors").each do |actor|
-      @actors.insert Actor.new(@client, actor)
+    def unzip_file(zip_file)
+      @series = BaseSeriesRectord.new(@client, zip_file.glob("Series"))
+      @actors = []
+      @banners = []
+      @episodes = []
+
+      zip_file.glob("Actors").each do |actor|
+        @actors << Actor.new(@client, actor)
+      end
+
+      zip_file.glob("Banners").each do |banner|
+        @banners.insert Banner.new(@client, banner)
+      end
+
+      zip_file.glob("Episode").each do |episode|
+        @episodes.insert Episode.new(@client, episode)
+      end
     end
-
-    zip_file.glob("Banners").each do |banner|
-      @banners.insert Banner.new(@client, banner)
-    end
-
-    @series = BaseSeriesRectord.new(@client, zip_file.glob("Series"))
-
-    zip_file.glob("Episode").each do |episode|
-      @episodes.insert Episode.new(@client, episode)
-    end
-
   end
-
-
 end
