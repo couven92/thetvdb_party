@@ -63,6 +63,7 @@ module TheTvDbParty
       end
       request_url = URI.join(BASE_URL, 'api/', request_url)
       resp = self.class.get(request_url).parsed_response
+      return nil unless resp["Data"]
       return nil unless resp["Data"]["Series"]
       BaseSeriesRecord.new(self, resp["Data"]["Series"])
     end
@@ -132,6 +133,46 @@ module TheTvDbParty
       end
       request_url = URI.join(BASE_URL, 'api/', request_url)
       get_base_episode_record_from_url request_url
+    end
+
+    # Retrieves the banners for a given series by its series id.
+    # Parameters::
+    #   +seriesid+::  The TheTvDb assigned unique identifier for the series to access.
+    # Returns::   An array of TheTvDbParty::Banner instances or +nil+ if the banners could not be retrieved. Note: may return [] if banners are retrieved but there are none.
+    def get_banners(seriesid)
+      request_url = "#{@apikey}/series/#{seriesid}/banners.xml"
+      request_url = URI.join(BASE_URL, 'api/', request_url)
+      response = self.class.get(request_url).parsed_response
+      return nil unless response["Banners"]
+      return nil unless response["Banners"]["Banner"]
+      case response["Banners"]["Banner"]
+        when Array
+          response["Banners"]["Banner"].map {|s|Banner.new(self, s)}
+        when Hash
+          [Banner.new(self, response["Banners"]["Banner"])]
+        else
+          []
+      end
+    end
+
+    # Retrieves the actors for a given series by its series id.
+    # Parameters::
+    #   +seriesid+::  The TheTvDb assigned unique identifier for the series to access.
+    # Returns::   An array of TheTvDbParty::Actor instances or +nil+ if the actors could not be retrieved. Note: may return [] if actors are retrieved but there are none.
+    def get_actors(seriesid)
+      request_url = "#{@apikey}/series/#{seriesid}/actors.xml"
+      request_url = URI.join(BASE_URL, 'api/', request_url)
+      response = self.class.get(request_url).parsed_response
+      return nil unless response["Actors"]
+      return nil unless response["Actors"]["Actor"]
+      case response["Actors"]["Actor"]
+        when Array
+          response["Actors"]["Actor"].map {|s|Actor.new(self, s)}
+        when Hash
+          [Actor.new(self, response["Actors"]["Actor"])]
+        else
+          []
+      end
     end
 
     private
