@@ -139,7 +139,7 @@ module TheTvDbParty
     # Parameters::
     #   +seriesid+::  The TheTvDb assigned unique identifier for the series to access.
     # Returns::   An array of TheTvDbParty::Banner instances or +nil+ if the banners could not be retrieved. Note: may return [] if banners are retrieved but there are none.
-    def get_banners(seriesid)
+    def get_series_banners(seriesid)
       request_url = "#{@apikey}/series/#{seriesid}/banners.xml"
       request_url = URI.join(BASE_URL, 'api/', request_url)
       response = self.class.get(request_url).parsed_response
@@ -159,7 +159,7 @@ module TheTvDbParty
     # Parameters::
     #   +seriesid+::  The TheTvDb assigned unique identifier for the series to access.
     # Returns::   An array of TheTvDbParty::Actor instances or +nil+ if the actors could not be retrieved. Note: may return [] if actors are retrieved but there are none.
-    def get_actors(seriesid)
+    def get_series_actors(seriesid)
       request_url = "#{@apikey}/series/#{seriesid}/actors.xml"
       request_url = URI.join(BASE_URL, 'api/', request_url)
       response = self.class.get(request_url).parsed_response
