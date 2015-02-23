@@ -107,6 +107,20 @@ module TheTvDbParty
       @client.get_series_absolute_episode @seriesid, episode_number
     end
 
+    # Retrieves the banners for this series.
+    # Returns::   An array of TheTvDbParty::Banner instances, or +nil+ if none could be retrieved.
+    # See Also::  TheTvDbParty::Client#get_series_banners
+    def get_banners
+      @client.get_series_banners @seriesid
+    end
+
+    # Retrieves the banners for this series.
+    # Returns::   An array of TheTvDbParty::Banner instances, or +nil+ if none could be retrieved.
+    # See Also::  TheTvDbParty::Client#get_series_actors
+    def get_actors
+      @client.get_series_actors @seriesid
+    end
+
     private
     def read_hash_values
       @seriesid = @hashValues["id"] ? @hashValues["id"].to_i : -1
