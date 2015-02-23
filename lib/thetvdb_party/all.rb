@@ -16,17 +16,17 @@ module TheTvDbParty
 
   def unzip_file(zip_file)
     zip_file.glob("Actors").each do |actor|
-      @actors.insert Actor.new(@client, actor)
+      @actors.insert Actor.new(@client, actor.input_stream.read)
     end
 
     zip_file.glob("Banners").each do |banner|
-      @banners.insert Banner.new(@client, banner)
+      @banners.insert Banner.new(@client, banner.input_stream.read)
     end
 
-    @series = BaseSeriesRectord.new(@client, zip_file.glob("Series"))
+    @series = BaseSeriesRectord.new(@client, zip_file.glob("Series").input_stream.read)
 
     zip_file.glob("Episode").each do |episode|
-      @episodes.insert Episode.new(@client, episode)
+      @episodes.insert Episode.new(@client, episode.input_stream.read)
     end
 
   end
