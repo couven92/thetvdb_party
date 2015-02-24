@@ -128,7 +128,7 @@ module TheTvDbParty
       @airs_dayofweek = @hashValues["Airs_DayOfWeek"]
       @airs_time = @hashValues["Airs_Time"] ? Time.parse(@hashValues["Airs_Time"]) : nil
       @contentrating = @hashValues["ContentRating"]
-      @firstaired = @hashValues["FirstAired"] ? Date.parse(hashValues["FirstAired"]) : nil
+      @firstaired = @hashValues["FirstAired"] ? Date.parse(@hashValues["FirstAired"]) : nil
       @genres = @hashValues["Genre"] ? @hashValues["Genre"].split('|').reject { |a| a.nil? || a.empty? } : []
       @imdb_id = @hashValues["IMDB_ID"]
       @language = @hashValues["Language"]
