@@ -158,7 +158,7 @@ module TheTvDbParty
       @productioncode = @hashValues["ProductionCode"]
       @rating = @hashValues["Rating"] ? @hashValues["Rating"].to_f : 0.0
       @ratingcount = @hashValues["RatingCount"] ? @hashValues["RatingCount"].to_i : 0
-      @seasonnumber = @hashValues["SeasonNumber"] ? @hashValues["RatingCount"].to_i : -1
+      @seasonnumber = @hashValues["SeasonNumber"] ? @hashValues["SeasonNumber"].to_i : -1
       @writer = @hashValues["Writer"] ? @hashValues["Writer"].split('|').reject { |a| a.nil? || a.empty? } : []
       @absolute_number = @hashValues["absolute_number"] ? @hashValues["absolute_number"].to_i : -1
       @airsafter_season = @hashValues["airsafter_season"] ? @hashValues["airsafter_season"].to_i : -1
