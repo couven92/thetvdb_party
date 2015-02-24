@@ -206,6 +206,27 @@ describe 'TheTvDbParty::Banner' do
     expect(record.midtone_color).to be_nil
   end
 
+  it 'should have nil color fields, if invalid colors are specified' do
+    record = TheTvDbParty::Banner.new(nil, { "Colors" => "INVALID_COLORS" })
+    expect(record.light_accent_color).to be_nil
+    expect(record.dark_accent_color).to be_nil
+    expect(record.midtone_color).to be_nil
+  end
+
+  it 'should have nil color fields, if no colors are specified' do
+    record = TheTvDbParty::Banner.new(nil, {  })
+    expect(record.light_accent_color).to be_nil
+    expect(record.dark_accent_color).to be_nil
+    expect(record.midtone_color).to be_nil
+  end
+
+  it 'should have nil color fields, if colors are specified, but at least one of the colors does not have exactly three elements' do
+    record = TheTvDbParty::Banner.new(nil, { "Colors" => "|81,81,81,4|15,15,15|201,226,246|" })
+    expect(record.light_accent_color).to be_nil
+    expect(record.dark_accent_color).to be_nil
+    expect(record.midtone_color).to be_nil
+  end
+
   it 'should not instantiate when created without hash values' do
     expect { TheTvDbParty::Banner.new(nil, nil) }.to raise_error
   end

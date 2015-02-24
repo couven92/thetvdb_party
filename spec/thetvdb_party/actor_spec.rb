@@ -57,7 +57,7 @@ describe 'TheTvDbParty::Actor' do
   end
 
   it 'should have a 0 sorting order, if invalid specified' do
-    record = TheTvDbParty::Actor.new(nil, { "SortOrder" => "4" })
+    record = TheTvDbParty::Actor.new(nil, { "SortOrder" => "INVALID_SORT_ORDER" })
     expect(record.sortOrder).to be_an_instance_of(Fixnum)
     expect(record.sortOrder).to be_between(0, 3).inclusive
     expect(record.sortOrder).to eq(0)
