@@ -200,7 +200,8 @@ ModelManifest.xml
 
 /.idea/
 /.bundle/
-/.yardoc
+/.yardoc/
+/.report/
 /Gemfile.lock
 /_yardoc/
 /coverage/

@@ -10,5 +10,11 @@ RDoc::Task.new do |rdoc|
 end
 
 RSpec::Core::RakeTask.new do |rspec|
-  rspec.pattern = 'spec/**/*_spec.rb'
+end
+
+namespace :spec do
+  RSpec::Core::RakeTask.new :html do |rspec|
+    rspec.name = "spec::html"
+    rspec.rspec_opts = %w(--format html --out .report/rspec_test_report.html)
+  end
 end
