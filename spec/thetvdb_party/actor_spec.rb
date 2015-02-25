@@ -27,7 +27,7 @@ describe 'TheTvDbParty::Actor' do
   it 'should have a relative/full image path' do
     record = TheTvDbParty::Actor.new(nil, { "Image" => "actors/27747.jpg" })
     expect(record.image_path_relative).to be_an_instance_of(String)
-    expect(record.image_path_full).to be_an_instance_of(URI::HTTP)
+    expect(record.image_path_full).to be_a(URI::Generic)
     expect(record.image_path_relative).to eq("actors/27747.jpg")
     expect(record.image_path_full).to eq(URI::join(TheTvDbParty::BASE_URL, 'banners/', 'actors/27747.jpg'))
   end
