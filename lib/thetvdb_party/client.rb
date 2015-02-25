@@ -22,8 +22,10 @@ module TheTvDbParty
     @language = nil
 
     # Creates a new TheTvDb client with the given API key
-    # apikey::  The API key to use when accessing the ThTvDb programmers API
-    def initialize(apikey)
+    # Parameters::
+    #   +apikey+::  Optional. The API key to use when accessing the ThTvDb programmers API
+    # Remarks::     if +apikey+ is +nil+, only the #get_series and #search methods will work, as they do not require an API key.
+    def initialize(apikey = nil)
       @apikey = apikey
     end
 
