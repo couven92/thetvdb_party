@@ -102,7 +102,7 @@ describe 'TheTvDbParty::BaseSeriesRecord' do
     expect(record.firstaired).to be_nil
   end
 
-  it 'should have a nil first aired date, id none specified' do
+  it 'should have a nil first aired date, if none specified' do
     record = TheTvDbParty::BaseSeriesRecord.new nil, {  }
     expect(record.firstaired).to be_nil
   end
@@ -112,17 +112,17 @@ describe 'TheTvDbParty::BaseSeriesRecord' do
     expect(record.genres).to match_array(["Crime"])
   end
 
-  it 'should have a multi element array for the writer, if a pipe-delimited list is specified' do
+  it 'should have a multi element array for the genre, if a pipe-delimited list is specified' do
     record = TheTvDbParty::BaseSeriesRecord.new(nil, { "Genre" => "Crime|Drama|Mystery" })
     expect(record.genres).to match_array(["Crime", "Drama", "Mystery"])
   end
 
-  it 'should have a multi element array for the writer, if a pipe-surrounded list is specified' do
+  it 'should have a multi element array for the genre, if a pipe-surrounded list is specified' do
     record = TheTvDbParty::BaseSeriesRecord.new(nil, { "Genre" => "|Crime|Drama|Mystery|" })
     expect(record.genres).to match_array(["Crime", "Drama", "Mystery"])
   end
 
-  it 'should have an empty array for writer, if none is specified' do
+  it 'should have an empty array for genre, if none is specified' do
     record = TheTvDbParty::BaseSeriesRecord.new(nil, {  })
     expect(record.genres).to be_empty
   end
