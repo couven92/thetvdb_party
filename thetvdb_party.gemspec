@@ -30,4 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "coderay", "~> 1.1"
 
   spec.add_dependency "httparty", "~> 0.6"
+  spec.add_dependency "rubyzip", "~> 1.1"
 end
