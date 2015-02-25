@@ -1,4 +1,4 @@
-# TheTvDbParty
+# TheTvDbParty [![Gem Version](https://badge.fury.io/rb/thetvdb_party.svg)](http://badge.fury.io/rb/thetvdb_party)
 
 The thetvdb_party gem accesses the TheTvDB programmers API as it is described on http://thetvdb.com/wiki/index.php/Programmers_API
 
