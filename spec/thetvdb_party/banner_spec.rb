@@ -144,6 +144,12 @@ describe 'TheTvDbParty::Banner' do
     expect(record.rating).to be 6.6667
   end
 
+  it 'should have a zero rating, if invalid specified' do
+    record = TheTvDbParty::Banner.new(nil, { "Rating" => "INVALID_RATING" })
+    expect(record.rating).to be_an_instance_of(Float)
+    expect(record.rating).to be 0.0
+  end
+
   it 'should have a zero rating, if it is not specified' do
     record = TheTvDbParty::Banner.new(nil, {  })
     expect(record.rating).to be_an_instance_of(Float)
@@ -154,7 +160,7 @@ describe 'TheTvDbParty::Banner' do
     record = TheTvDbParty::Banner.new(nil, { "RatingCount" => "6" })
     expect(record.rating_count).to be_an_instance_of(Fixnum)
     expect(record.rating_count).to be >= 0
-    expect(record.rating_count).to be <= 6
+    expect(record.rating_count).to eq(6)
   end
 
   it 'should have a zero rating count, if it is not specified' do
