@@ -26,16 +26,16 @@ describe 'TheTvDbParty::Actor' do
 
   it 'should have a relative/full image path' do
     record = TheTvDbParty::Actor.new(nil, { "Image" => "actors/27747.jpg" })
-    expect(record.imagepath_relative).to be_an_instance_of(String)
-    expect(record.imagepath_full).to be_an_instance_of(URI)
-    expect(record.imagepath_relative).to eq("actors/27747.jpg")
-    expect(record.imagepath_full).to eq(URI::join(TheTvDbParty::BASE_URL, 'banners/', 'actors/27747.jpg'))
+    expect(record.image_path_relative).to be_an_instance_of(String)
+    expect(record.image_path_full).to be_an_instance_of(URI::HTTP)
+    expect(record.image_path_relative).to eq("actors/27747.jpg")
+    expect(record.image_path_full).to eq(URI::join(TheTvDbParty::BASE_URL, 'banners/', 'actors/27747.jpg'))
   end
 
   it 'should have a nil relative/full image path, if not specified' do
     record = TheTvDbParty::Actor.new(nil, {})
-    expect(record.imagepath_relative).to be_nil
-    expect(record.imagepath_full).to be_nil
+    expect(record.image_path_relative).to be_nil
+    expect(record.image_path_full).to be_nil
   end
 
   it 'should have a name field' do
@@ -51,23 +51,23 @@ describe 'TheTvDbParty::Actor' do
 
   it 'should have a sorting order between 0-3' do
     record = TheTvDbParty::Actor.new(nil, { "SortOrder" => "2" })
-    expect(record.sortOrder).to be_an_instance_of(Fixnum)
-    expect(record.sortOrder).to be_between(0, 3).inclusive
-    expect(record.sortOrder).to eq(2)
+    expect(record.sort_order).to be_an_instance_of(Fixnum)
+    expect(record.sort_order).to be_between(0, 3).inclusive
+    expect(record.sort_order).to eq(2)
   end
 
   it 'should have a 0 sorting order, if invalid specified' do
     record = TheTvDbParty::Actor.new(nil, { "SortOrder" => "INVALID_SORT_ORDER" })
-    expect(record.sortOrder).to be_an_instance_of(Fixnum)
-    expect(record.sortOrder).to be_between(0, 3).inclusive
-    expect(record.sortOrder).to eq(0)
+    expect(record.sort_order).to be_an_instance_of(Fixnum)
+    expect(record.sort_order).to be_between(0, 3).inclusive
+    expect(record.sort_order).to eq(0)
   end
 
   it 'should have a 0 sorting order, if invalid specified' do
     record = TheTvDbParty::Actor.new(nil, {  })
-    expect(record.sortOrder).to be_an_instance_of(Fixnum)
-    expect(record.sortOrder).to be_between(0, 3).inclusive
-    expect(record.sortOrder).to eq(0)
+    expect(record.sort_order).to be_an_instance_of(Fixnum)
+    expect(record.sort_order).to be_between(0, 3).inclusive
+    expect(record.sort_order).to eq(0)
   end
 
   it 'should not instantiate when created without hash values' do
