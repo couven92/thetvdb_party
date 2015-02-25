@@ -27,7 +27,7 @@ describe 'TheTvDbParty::Banner' do
   it 'should have a relative/full banner path' do
     record = TheTvDbParty::Banner.new(nil, { "BannerPath" => "text/80348.jpg" })
     expect(record.bannerpath_relative).to be_an_instance_of(String)
-    expect(record.bannerpath_full).to be_an_instance_of(URI)
+    expect(record.bannerpath_full).to be_an_instance_of(URI::Generic)
     expect(record.bannerpath_relative).to eq("text/80348.jpg")
     expect(record.bannerpath_full).to eq(URI::join(TheTvDbParty::BASE_URL, 'banners/', "text/80348.jpg"))
   end
@@ -41,7 +41,7 @@ describe 'TheTvDbParty::Banner' do
   it 'should have a relative/full thumbnail path' do
     record = TheTvDbParty::Banner.new(nil, { "ThumbnailPath" => "_cache/fanart/original/80348-49.jpg" })
     expect(record.bannerpath_relative).to be_an_instance_of(String)
-    expect(record.bannerpath_full).to be_an_instance_of(URI)
+    expect(record.bannerpath_full).to be_an_instance_of(URI::Generic)
     expect(record.bannerpath_relative).to eq("_cache/fanart/original/80348-49.jpg")
     expect(record.bannerpath_full).to eq(URI::join(TheTvDbParty::BASE_URL, 'banners/', "_cache/fanart/original/80348-49.jpg"))
   end
@@ -55,7 +55,7 @@ describe 'TheTvDbParty::Banner' do
   it 'should have a relative/full vignette path' do
     record = TheTvDbParty::Banner.new(nil, { "VignettePath" => "fanart/vignette/80348-49.jpg" })
     expect(record.bannerpath_relative).to be_an_instance_of(String)
-    expect(record.bannerpath_full).to be_an_instance_of(URI)
+    expect(record.bannerpath_full).to be_an_instance_of(URI::Generic)
     expect(record.bannerpath_relative).to eq("fanart/vignette/80348-49.jpg")
     expect(record.bannerpath_full).to eq(URI::join(TheTvDbParty::BASE_URL, 'banners/', "fanart/vignette/80348-49.jpg"))
   end
