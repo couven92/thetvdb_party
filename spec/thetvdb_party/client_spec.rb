@@ -14,9 +14,8 @@ describe 'TheTvDbParty::Client' do
   end
 
   it 'should have a language associated with it' do
-    client = TheTvDbParty::Client.new do |c|
-      c.language = "en"
-    end
+    client = TheTvDbParty::Client.new
+    client.language = "en"
     expect(client.language).to be_a String
     expect(client.language).to eq "en"
   end
