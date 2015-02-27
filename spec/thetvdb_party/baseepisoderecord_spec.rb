@@ -110,7 +110,7 @@ describe 'TheTvDbParty::BaseEpisodeRecord' do
   it 'should have a DVD season number' do
     record = TheTvDbParty::BaseEpisodeRecord.new(nil, { "DVD_season" => "1" })
     expect(record.dvd_season).to be_an_instance_of(Fixnum)
-    expect(record.dvd_season).to eq(1.2)
+    expect(record.dvd_season).to eq(1)
   end
 
   it 'should have a negative DVD season number, if invalid specified' do
