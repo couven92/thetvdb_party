@@ -54,14 +54,26 @@ module TheTvDbParty
 
     private
     def read_hash_values
-      @id = @hashValues["id"] ? @hashValues["id"].to_i : -1
-      @seriesid = @hashValues["seriesid"] ? @hashValues["seriesid"].to_i : -1
+      begin
+        @id = @hashValues["id"] ? Integer(@hashValues["id"]) : -1
+      rescue ArgumentError
+        @id = -1
+      end
+      begin
+        @seriesid = @hashValues["seriesid"] ? Integer(@hashValues["seriesid"]) : -1
+      rescue ArgumentError
+        @seriesid = -1
+      end
       @language = @hashValues["language"]
       @seriesname = @hashValues["SeriesName"]
       @aliasnames = @hashValues["AliasNames"] ? @hashValues["AliasNames"].split('|').reject { |a| a.nil? || a.empty? } : []
       @bannerpath_relative = @hashValues["banner"]
       @overview = @hashValues["Overview"]
-      @firstaired = @hashValues["FirstAired"] ? Date.parse(@hashValues["FirstAired"]) : nil
+      begin
+        @firstaired = @hashValues["FirstAired"] ? Date.parse(@hashValues["FirstAired"]) : nil
+      rescue ArgumentError
+        @firstaired = nil
+      end
       @imdb_id = @hashValues["IMDB_ID"]
       @zap2it_id = @hashValues["zap2it_id"]
       @network = @hashValues["Network"]

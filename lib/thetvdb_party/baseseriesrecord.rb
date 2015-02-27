@@ -123,31 +123,67 @@ module TheTvDbParty
 
     private
     def read_hash_values
-      @seriesid = @hashValues["id"] ? @hashValues["id"].to_i : -1
+      begin
+        @seriesid = @hashValues["id"] ? Integer(@hashValues["id"]) : -1
+      rescue ArgumentError
+        @seriesid = -1
+      end
       @actors = @hashValues["Actors"] ? @hashValues["Actors"].split('|').reject { |a| a.nil? || a.empty? } : []
       @airs_dayofweek = @hashValues["Airs_DayOfWeek"]
-      @airs_time = @hashValues["Airs_Time"] ? Time.parse(@hashValues["Airs_Time"]) : nil
+      begin
+        @airs_time = @hashValues["Airs_Time"] ? Time.parse(@hashValues["Airs_Time"]) : nil
+      rescue ArgumentError
+        @airs_time = nil
+      end
       @contentrating = @hashValues["ContentRating"]
-      @firstaired = @hashValues["FirstAired"] ? Date.parse(@hashValues["FirstAired"]) : nil
+      begin
+        @firstaired = @hashValues["FirstAired"] ? Date.parse(@hashValues["FirstAired"]) : nil
+      rescue ArgumentError
+        @firstaired = nil
+      end
       @genres = @hashValues["Genre"] ? @hashValues["Genre"].split('|').reject { |a| a.nil? || a.empty? } : []
       @imdb_id = @hashValues["IMDB_ID"]
       @language = @hashValues["Language"]
       @network = @hashValues["Network"]
-      @networkid = @hashValues["NetworkID"] ? @hashValues["NetworkID"].to_i : -1
+      begin
+        @networkid = @hashValues["NetworkID"] ? Integer(@hashValues["NetworkID"]) : nil
+      rescue ArgumentError
+        @networkid = nil
+      end
       @overview = @hashValues["Overview"]
       @rating = @hashValues["Rating"] ? @hashValues["Rating"].to_f : 0.0
       @ratingcount = @hashValues["RatingCount"] ? @hashValues["RatingCount"].to_i : 0
-      @runtime = @hashValues["Runtime"] ? @hashValues["Runtime"].to_i : -1
-      @tvcom_id = @hashValues["SeriesID"] ? @hashValues["SeriesID"].to_i : nil
+      begin
+        @runtime = @hashValues["Runtime"] ? Integer(@hashValues["Runtime"]) : -1
+      rescue ArgumentError
+        @runtime = -1
+      end
+      begin
+        @tvcom_id = @hashValues["SeriesID"] ? Integer(@hashValues["SeriesID"]) : nil
+      rescue ArgumentError
+        @tvcom_id = nil
+      end
       @seriesname = @hashValues["SeriesName"]
-      @status = @hashValues["Status"]
-      @added = @hashValues["added"] ? DateTime.parse(@hashValues["added"]) : nil
-      @addedby = @hashValues["addedBy"] ? @hashValues["addedBy"].to_i : nil
+      @status = @hashValues["Status"] && %w(Ended Continuing).include?(@hashValues["Status"]) ? @hashValues["Status"] : nil
+      begin
+        @added = @hashValues["added"] ? DateTime.parse(@hashValues["added"]) : nil
+      rescue ArgumentError
+        @added = nil
+      end
+      begin
+        @addedby = @hashValues["addedBy"] ? Integer(@hashValues["addedBy"]) : nil
+      rescue ArgumentError
+        @addedby = nil
+      end
       @bannerpath_relative = @hashValues["banner"]
       @fanartpath_relative = @hashValues["fanart"]
       @posterpath_relative = @hashValues["poster"]
       @zap2it_id = @hashValues["zap2it_id"]
-      @lastupdated = @hashValues["lastupdated"] ? Time.at(@hashValues["lastupdated"].to_i).to_datetime : nil
+      begin
+        @lastupdated = @hashValues["lastupdated"] ? Time.at(Integer(@hashValues["lastupdated"])).to_datetime : nil
+      rescue ArgumentError
+        @lastupdated = nil
+      end
       @bannerpath_full = @bannerpath_relative ? URI::join(BASE_URL, "banners/", @bannerpath_relative) : nil
       @fanartpath_full = @fanartpath_relative ? URI::join(BASE_URL, "banners/", @fanartpath_relative) : nil
       @posterpath_full = @posterpath_relative ? URI::join(BASE_URL, "banners/", @posterpath_relative) : nil

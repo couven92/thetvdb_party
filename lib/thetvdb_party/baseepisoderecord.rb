@@ -139,18 +139,53 @@ module TheTvDbParty
 
     private
     def read_hash_values
-      @id = @hashValues["id"] ? @hashValues["id"].to_i : -1
-      @combined_episodenumber = @hashValues["Combined_episodenumber"] ? @hashValues["Combined_episodenumber"].to_f : -1.0
-      @combined_season = @hashValues["Combined_season"] ? @hashValues["Combined_season"].to_f : -1.0
+      # @id = @hashValues["id"] ? @hashValues["id"].to_i : -1
+      begin
+        @id = @hashValues["id"] ? Integer(@hashValues["id"], 10) : -1
+      rescue ArgumentError
+        @id = -1
+      end
+      # @combined_episodenumber = @hashValues["Combined_episodenumber"] ? @hashValues["Combined_episodenumber"].to_f : -1.0
+      begin
+        @combined_episodenumber = @hashValues["Combined_episodenumber"] ? Float(@hashValues["Combined_episodenumber"]) : -1.0
+      rescue ArgumentError
+        @combined_episodenumber = -1.0
+      end
+      # @combined_season = @hashValues["Combined_season"] ? @hashValues["Combined_season"].to_f : -1.0
+      begin
+        @combined_season = @hashValues["Combined_season"] ? Integer(@hashValues["Combined_season"]) : -1
+      rescue ArgumentError
+        @combined_season = -1
+      end
       @dvd_chapter = @hashValues["DVD_chapter"]
       @dvd_discid = @hashValues["DVD_discid"]
-      @dvd_episodenumber = @hashValues["DVD_episodenumber"] ? @hashValues["DVD_episodenumber"].to_f : -1.0
-      @dvd_season = @hashValues["DVD_season"] ? @hashValues["DVD_season"].to_i : -1
+      # @dvd_episodenumber = @hashValues["DVD_episodenumber"] ? @hashValues["DVD_episodenumber"].to_f : -1.0
+      begin
+        @dvd_episodenumber = @hashValues["DVD_episodenumber"] ? Float(@hashValues["DVD_episodenumber"]) : -1.0
+      rescue ArgumentError
+        @dvd_episodenumber = -1.0
+      end
+      # @dvd_season = @hashValues["DVD_season"] ? @hashValues["DVD_season"].to_i : -1
+      begin
+        @dvd_season = @hashValues["DVD_season"] ? Integer(@hashValues["DVD_season"]) : -1
+      rescue ArgumentError
+        @dvd_season = -1
+      end
       @director = @hashValues["Director"] ? @hashValues["Director"].split('|').reject { |a| a.nil? || a.empty? } : []
-      @epimgflag = @hashValues["EpImgFlag"] ? @hashValues["EpImgFlag"].to_i : 0
+      epimgflag = @hashValues["EpImgFlag"] ? @hashValues["EpImgFlag"].to_i : 0
+      @epimgflag = (1..6).include?(epimgflag) ? epimgflag : 0
       @episodename = @hashValues["EpisodeName"]
-      @episodenumber = @hashValues["EpisodeNumber"] ? @hashValues["EpisodeNumber"].to_i : -1
-      @firstaired = @hashValues["FirstAired"] ? Date.parse(@hashValues["FirstAired"].to_i) : nil
+      # @episodenumber = @hashValues["EpisodeNumber"] ? @hashValues["EpisodeNumber"].to_i : -1
+      begin
+        @episodenumber = @hashValues["EpisodeNumber"] ? Integer(@hashValues["EpisodeNumber"]) : -1
+      rescue ArgumentError
+        @episodenumber = -1
+      end
+      begin
+        @firstaired = @hashValues["FirstAired"] ? Date.parse(@hashValues["FirstAired"]) : nil
+      rescue ArgumentError
+        @firstaired = nil
+      end
       @gueststars = @hashValues["GuestStars"] ? @hashValues["GuestStars"].split('|').reject { |a| a.nil? || a.empty? } : []
       @imdb_id = @hashValues["IMDB_ID"]
       @language = @hashValues["Language"]
@@ -158,18 +193,54 @@ module TheTvDbParty
       @productioncode = @hashValues["ProductionCode"]
       @rating = @hashValues["Rating"] ? @hashValues["Rating"].to_f : 0.0
       @ratingcount = @hashValues["RatingCount"] ? @hashValues["RatingCount"].to_i : 0
-      @seasonnumber = @hashValues["SeasonNumber"] ? @hashValues["SeasonNumber"].to_i : -1
+      begin
+        @seasonnumber = @hashValues["SeasonNumber"] ? Integer(@hashValues["SeasonNumber"]) : -1
+      rescue ArgumentError
+        @seasonnumber = -1
+      end
       @writer = @hashValues["Writer"] ? @hashValues["Writer"].split('|').reject { |a| a.nil? || a.empty? } : []
-      @absolute_number = @hashValues["absolute_number"] ? @hashValues["absolute_number"].to_i : -1
-      @airsafter_season = @hashValues["airsafter_season"] ? @hashValues["airsafter_season"].to_i : -1
-      @airsbefore_episode = @hashValues["airsbefore_episode"] ? @hashValues["airsbefore_episode"].to_i : -1
-      @airsbefore_season = @hashValues["airsbefore_season"] ? @hashValues["airsbefore_season"].to_i : -1
+      begin
+        @absolute_number = @hashValues["absolute_number"] ? Integer(@hashValues["absolute_number"]) : -1
+      rescue ArgumentError
+        @absolute_number = -1
+      end
+      begin
+        @airsafter_season = @hashValues["airsafter_season"] ? Integer(@hashValues["airsafter_season"]) : -1
+      rescue ArgumentError
+        @airsafter_season = -1
+      end
+      begin
+        @airsbefore_episode = @hashValues["airsbefore_episode"] ? Integer(@hashValues["airsbefore_episode"]) : -1
+      rescue ArgumentError
+        @airsbefore_episode = -1
+      end
+      begin
+        @airsbefore_season = @hashValues["airsbefore_season"] ? Integer(@hashValues["airsbefore_season"]) : -1
+      rescue ArgumentError
+        @airsbefore_season = -1
+      end
       @imagepath_relative = @hashValues["filename"]
       @imagepath_full = @imagepath_relative ? URI::join(BASE_URL, 'banners/', @imagepath_relative) : nil
-      @lastupdated = @hashValues["lastupdated"] ? Time.at(@hashValues["lastupdated"].to_i).to_datetime : nil
-      @seasonid = @hashValues["seasonid"] ? @hashValues["seasonid"].to_i : -1
-      @seriesid = @hashValues["seriesid"] ? @hashValues["seriesid"].to_i : -1
-      @thumb_added = @hashValues["thumb_added"] ? Date.parse(@hashValues["thumb_added"]) : nil
+      begin
+        @lastupdated = @hashValues["lastupdated"] ? Time.at(Integer(@hashValues["lastupdated"])).to_datetime : nil
+      rescue ArgumentError
+        @lastupdated = nil
+      end
+      begin
+        @seasonid = @hashValues["seasonid"] ? Integer(@hashValues["seasonid"]) : -1
+      rescue ArgumentError
+        @seasonid = -1
+      end
+      begin
+        @seriesid = @hashValues["seriesid"] ? Integer(@hashValues["seriesid"]) : -1
+      rescue ArgumentError
+        @seriesid = -1
+      end
+      begin
+        @thumb_added = @hashValues["thumb_added"] ? Time.parse(@hashValues["thumb_added"]).to_datetime : nil
+      rescue ArgumentError
+        @thumb_added = nil
+      end
       @thumb_height = @hashValues["thumb_height"] ? @hashValues["thumb_height"].to_i : 0
       @thumb_width = @hashValues["thumb_width"] ? @hashValues["thumb_width"].to_i : 0
 
