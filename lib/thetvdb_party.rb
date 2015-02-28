@@ -1,6 +1,7 @@
 require 'httparty'
 
 require 'thetvdb_party/baseseriesrecord'
+require 'thetvdb_party/fullseriesrecord'
 require 'thetvdb_party/baseepisoderecord'
 require 'thetvdb_party/client'
 require 'thetvdb_party/searchseriesrecord'
