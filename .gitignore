@@ -215,3 +215,6 @@ ModelManifest.xml
 *.a
 *.gem
 mkmf.log
+
+# Ignore environment file 
+.env
