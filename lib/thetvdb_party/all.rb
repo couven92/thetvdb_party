@@ -1,34 +1,36 @@
 module TheTvDbParty
   class AllSeriesInformation
 
-    attr_reader :actors, :banners, :series, :episodes
-    
-    def initialize(client, zip_file)
+    attr_reader :client, :actors, :banners, :series, :episodes
+
+    def initialize(client, zip_buffer)
       @client = client
 
-      unzip_file(zip_file)
+      unzip_file(zip_buffer)
 
     end
 
     private
-    def unzip_file(zip_file)
-      @series = BaseSeriesRectord.new(@client, zip_file.glob("Series").input_stream.read)
+    def unzip_file(zip_buffer)
       @actors = []
       @banners = []
       @episodes = []
-  
-      zip_file.glob("Actors").each do |actor|
-        @actors << Actor.new(@client, actor.input_stream.read)
+
+      zip_file = Zip::InputStream.open(StringIO.new(zip_buffer))
+
+      while entry = zip_file.get_next_entry
+        case entry.name
+          when "en.xml"
+            # @series = BaseSeriesRecord.new(@client, entry.read)
+            # @episodes << Episode.new(@client, entry.read)
+          when "actors.xml"
+            @actors << Actor.new(@client, entry.read)
+          when "banners.xml"
+            @banners << Banner.new(@client, entry.read)
+          else
+            puts entry.name
+        end
       end
-  
-      zip_file.glob("Banners").each do |banner|
-        @banners << Banner.new(@client, banner.input_stream.read)
-      end
-  
-      zip_file.glob("Episode").each do |episode|
-        @episodes << Episode.new(@client, episode.input_stream.read)
-      end
-  
     end
   end
 end

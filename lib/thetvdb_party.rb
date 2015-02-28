@@ -1,4 +1,5 @@
 require 'httparty'
+require 'zip'
 
 require 'thetvdb_party/baseseriesrecord'
 require 'thetvdb_party/fullseriesrecord'
@@ -10,6 +11,7 @@ require 'thetvdb_party/banner'
 require 'thetvdb_party/version'
 require 'thetvdb_party/banner'
 require 'thetvdb_party/actor'
+require 'thetvdb_party/all'
 
 # thetvdb_party gem root namespace
 module TheTvDbParty
