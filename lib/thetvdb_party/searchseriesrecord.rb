@@ -52,6 +52,10 @@ module TheTvDbParty
       @client.get_base_series_record @seriesid
     end
 
+    def get_full_series_record
+      @client.get_full_series_record @seriesid
+    end
+
     private
     def read_hash_values
       begin
