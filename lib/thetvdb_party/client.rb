@@ -189,7 +189,7 @@ module TheTvDbParty
 
       return nil unless resp.body
 
-      AllSeriesInformation.new(@client, resp.body)
+      AllSeriesInformation.new(self, resp.body)
 
     end
 
