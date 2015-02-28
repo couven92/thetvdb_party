@@ -10,7 +10,6 @@ Gem::Specification.new do |spec|
   spec.email         = ["fredrik.rasch@gmail.com", "tim.teige91@gmail.com", "peterme@peterme.net"]
   spec.summary       = "Ruby Gem for accessing the TheTVDB programmers API"
   spec.description   = <<-EOF
-    NOTE: This Gem is currently in its pre-alpha development stadium and currently only supports minimal capability.
     The thetvdb_party gem accesses the TheTvDB programmers API as it is described on \"http://thetvdb.com/wiki/index.php/Programmers_API\".
     It uses compression to minimize bandwith when accessing Full Series Records.
     EOF
