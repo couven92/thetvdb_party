@@ -179,7 +179,7 @@ module TheTvDbParty
 
     def get_series_all(seriesid)
       unless @language
-        request_url = "#{@apikey}/series/#{seriesid}/all"
+        request_url = "#{@apikey}/series/#{seriesid}/all/en.zip"
       else
         request_url = "#{@apikey}/series/#{seriesid}/all/#{@language}.zip"
       end

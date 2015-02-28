@@ -1,4 +1,5 @@
 require 'httparty'
+require 'zip'
 
 require 'thetvdb_party/baseseriesrecord'
 require 'thetvdb_party/baseepisoderecord'
