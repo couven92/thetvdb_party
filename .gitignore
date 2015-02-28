@@ -217,4 +217,4 @@ ModelManifest.xml
 mkmf.log
 
 # Ignore environment file 
-.env
+.env.yml
