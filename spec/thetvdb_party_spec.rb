@@ -11,7 +11,7 @@ describe 'TheTvDbParty' do
 
   it 'should find the Base Series Record for search results' do
     client = TheTvDbParty::Client.new(ENV["TVDB_API_KEY"])
-    pending "No API key available, test cannot run. Configure .env file to include an api key." unless client.apikey
+    pending "No API key available, test cannot run. Configure .env.yml file to include an api key." unless client.apikey
     client.search("The Mentalist").each do |result_record|
       expect(result_record).to be_a TheTvDbParty::SearchSeriesRecord
       base_series_record = result_record.get_base_series_record
@@ -22,7 +22,7 @@ describe 'TheTvDbParty' do
 
   it 'should find the Full Series Record for search results and this should include an episode list' do
     client = TheTvDbParty::Client.new(ENV["TVDB_API_KEY"])
-    pending "No API key available, test cannot run. Configure .env file to include an api key." unless client.apikey
+    pending "No API key available, test cannot run. Configure .env.yml file to include an api key." unless client.apikey
     client.search("The Mentalist").each do |result_record|
       expect(result_record).to be_a TheTvDbParty::SearchSeriesRecord
       full_series_record = result_record.get_full_series_record
