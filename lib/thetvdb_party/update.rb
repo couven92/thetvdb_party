@@ -52,7 +52,7 @@ module TheTvDbParty
           @episodes = Array.new
           for episode in data["Episode"]
             #@episodes.push(Struct::EpisodeUpdate.new(episode["id"],episode["Series"],episode["time"]))
-            @episodes.push({:episodeid=>episode["id"],:seriesid=>episode["Series"],:updatetime=>serie["time"]})
+            @episodes.push({:episodeid=>episode["id"],:seriesid=>episode["Series"],:updatetime=>episode["time"]})
           end
         end
         if(data["Banner"])
