@@ -210,7 +210,7 @@ module TheTvDbParty
     
     def get_updates_by_timeframe(timeframe)
       if(["day","week","month","all"].index(timeframe).nil? == false)
-        request_url = "#{@apikey}/updates/updates_#{timeframe}.xml"
+        request_url = "#{@apikey}/updates/updates_#{timeframe}.zip"
         request_url = URI.join(BASE_URL,'api/', request_url)
         
         resp = self.class.get(request_url)
@@ -223,7 +223,7 @@ module TheTvDbParty
     end
     
     def get_updates_by_lastupdate(timestamp, type = "series")
-      if(["series","episode","all","none"].index(timeframe).nil? == false)
+      if(["series","episode","all","none"].index(type).nil? == false)
         request_url = "Updates.php?time=#{timestamp}&type=#{type}"
         request_url = URI.join(BASE_URL,'api/',request_url)
         

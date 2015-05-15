@@ -20,7 +20,7 @@ module TheTvDbParty
     def initialize(client, data, ziped)
       @client = client
       
-      if ziped
+      if(ziped==true)
         read_ziped_values(data)
       else
         read_hash_values(data)
@@ -28,7 +28,7 @@ module TheTvDbParty
     end
     
     private
-    def read_zipped_values(zip_buffer)
+    def read_ziped_values(zip_buffer)
       zip_file = Zip::InputStream.open(StringIO.new(zip_buffer))
 
       # The zip files only consists of a single file
@@ -76,8 +76,8 @@ module TheTvDbParty
         if items["Episode"]
           @episodes = Array.new
           for episode in items["Episode"]
-            @episodes.push(Struct::EpisodeUpdate.new(episode,nil,nil))
-            @episodes.push({:seriesid=>episode,:seriesid=>nil,:updatetime=>nil})
+            #@episodes.push(Struct::EpisodeUpdate.new(episode,nil,nil))
+            @episodes.push({:episodeid=>episode,:seriesid=>nil,:updatetime=>nil})
           end
         end
       end
