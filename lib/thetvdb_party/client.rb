@@ -207,6 +207,31 @@ module TheTvDbParty
 
       FullSeriesRecord.new self, resp["Data"]
     end
+    
+    def get_updates_by_timeframe(timeframe)
+      if(["day","week","month","all"].index(timeframe).nil? == false)
+        request_url = "#{@apikey}/updates/updates_#{timeframe}.xml"
+        request_url = URI.join(BASE_URL,'api/', request_url)
+        
+        resp = self.class.get(request_url)
+        return nil unless resp.nil? == false
+        return nil unless resp.body.nil? == false
+        return Update.new(self,resp.body,true)
+      else
+        return nil
+      end
+    end
+    
+    def get_updates_by_lastupdate(timestamp, type = "series")
+      if(["series","episode","all","none"].index(timeframe).nil? == false)
+        request_url = "Updates.php?time=#{timestamp}&type=#{type}"
+        request_url = URI.join(BASE_URL,'api/',request_url)
+        
+        resp = self.class.get(request_url)
+        return nil unless resp.nil? == false
+        return Update.new(self,resp,false)
+      end
+    end
 
     private
     def get_base_episode_record_from_url(request_url)
