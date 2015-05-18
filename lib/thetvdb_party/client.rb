@@ -236,8 +236,9 @@ module TheTvDbParty
     private
     def get_base_episode_record_from_url(request_url)
       resp = self.class.get(request_url).parsed_response
-      return nil unless resp["Episode"]
-      BaseEpisodeRecord.new(self, resp["Episode"])
+      return nil unless resp["Data"]
+      return nil unless resp["Data"]["Episode"]
+      BaseEpisodeRecord.new(self, resp["Data"]["Episode"])
     end
   end
 end
