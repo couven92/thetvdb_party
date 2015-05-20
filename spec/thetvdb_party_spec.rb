@@ -1,6 +1,7 @@
 require 'rspec'
 require 'thetvdb_party'
 
+
 describe 'TheTvDbParty' do
   it 'should find search results' do
     client = TheTvDbParty::Client.new(ENV["TVDB_API_KEY"])
