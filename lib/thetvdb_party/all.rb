@@ -19,9 +19,6 @@ module TheTvDbParty
 
       while entry = zip_file.get_next_entry
         case entry.name
-          when "en.xml"
-            full_hash = MultiXml.parse(entry.get_input_stream.read)
-            @full_series_record = FullSeriesRecord.new(@client, full_hash["Data"])
           when "actors.xml"
             actors_hash = MultiXml.parse(entry.get_input_stream.read)
 
@@ -33,6 +30,9 @@ module TheTvDbParty
             banners_hash["Banners"]["Banner"].each do |b|
               banners << Banner.new(@client, b)
             end if banners_hash["Banners"]
+          else
+            full_hash = MultiXml.parse(entry.get_input_stream.read)
+            @full_series_record = FullSeriesRecord.new(@client, full_hash["Data"])
         end
       end
     end
