@@ -30,9 +30,14 @@ module TheTvDbParty
             end if actors_hash["Actors"]
           when "banners.xml"
             banners_hash = MultiXml.parse(entry.get_input_stream.read)
-            banners_hash["Banners"]["Banner"].each do |b|
-              banners << Banner.new(@client, b)
-            end if banners_hash["Banners"]
+            case banners_hash["Banners"]["Banner"]
+              when Array
+                banners_hash["Banners"]["Banner"].map {|s|Banner.new(self, s)}
+              when Hash
+                [Banner.new(self, banners_hash["Banners"]["Banner"])]
+              else
+                []
+            end if banners_hash
         end
       end
     end
