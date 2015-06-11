@@ -112,7 +112,8 @@ module TheTvDbParty
     # See Also::    #get_series_season_episode, #get_series_absolute_episode, #get_base_episode_record
     def get_series_dvd_season_episode(seriesid, season_number, episode_number)
       unless @language
-        request_url = "#{@apikey}/series/#{seriesid}/dvd/#{season_number}/#{episode_number}"
+        # DVD requires you to specify language:
+        request_url = "#{@apikey}/series/#{seriesid}/dvd/#{season_number}/#{episode_number}/en.xml"
       else
         request_url = "#{@apikey}/series/#{seriesid}/dvd/#{season_number}/#{episode_number}/#{@language}.xml"
       end
@@ -129,7 +130,8 @@ module TheTvDbParty
     # See Also::    #get_series_season_episode, #get_series_dvd_season_episode, #get_base_episode_record
     def get_series_absolute_episode(seriesid, episode_number)
       unless @language
-        request_url = "#{@apikey}/series/#{seriesid}/absolute/#{episode_number}"
+        # Absolute requires you to specify language:
+        request_url = "#{@apikey}/series/#{seriesid}/absolute/#{episode_number}/en.xml"
       else
         request_url = "#{@apikey}/series/#{seriesid}/absolute/#{episode_number}/#{@language}.xml"
       end
