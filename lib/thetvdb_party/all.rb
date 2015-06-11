@@ -12,8 +12,6 @@ module TheTvDbParty
 
     private
     def unzip_file(zip_buffer)
-      @actors = []
-      
       zip_file = Zip::InputStream.open(StringIO.new(zip_buffer))
 
       while entry = zip_file.get_next_entry
@@ -21,14 +19,19 @@ module TheTvDbParty
           when "actors.xml"
             actors_hash = MultiXml.parse(entry.get_input_stream.read)
 
-            actors_hash["Actors"]["Actor"].each do |a|
-              actors << Actor.new(@client, a)
-            end if actors_hash["Actors"]
+            case actors_hash["Actors"]["Actor"]
+              when Array
+                @actors = actors_hash["Actors"]["Actor"].map { |a| Actor.new(self, a) }
+              when Hash
+                @actors = [Actor.new(self, actors_hash["Actors"]["Actor"])]
+              else
+                @actors = []
+            end if actors_hash && actors_hash["Actors"]
           when "banners.xml"
             banners_hash = MultiXml.parse(entry.get_input_stream.read)
             case banners_hash["Banners"]["Banner"]
               when Array
-                @banners = banners_hash["Banners"]["Banner"].map {|s|Banner.new(self, s)}
+                @banners = banners_hash["Banners"]["Banner"].map { |b| Banner.new(self, b) }
               when Hash
                 @banners = [Banner.new(self, banners_hash["Banners"]["Banner"])]
               else
